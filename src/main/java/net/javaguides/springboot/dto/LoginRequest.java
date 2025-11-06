@@ -1,11 +1,20 @@
 package net.javaguides.springboot.dto;
 
 public class LoginRequest {
+	private Long id;
     private String email;
     private String senha;
 
     public LoginRequest() {}
 
+    
+    public Long getId() {
+    	return id;
+    }
+    
+    public void setId() {
+    	this.id = id;
+    }
     public String getEmail() {
         return email;
     }

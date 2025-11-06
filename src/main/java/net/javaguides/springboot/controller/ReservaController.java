@@ -26,7 +26,7 @@ public class ReservaController {
 
     //  buscar reserva por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Reserva> getReservaById(@PathVariable Long id) {
+    public ResponseEntity<Reserva> getReservaById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(reservaService.getReservaById(id));
     }
 
@@ -46,7 +46,7 @@ public class ReservaController {
 
     //  atualizar reserva existente
     @PutMapping("/{id}")
-    public ResponseEntity<Reserva> atualizarReserva(@PathVariable Long id, @RequestBody Reserva reservaAtualizada) {
+    public ResponseEntity<Reserva> atualizarReserva(@PathVariable("id") Long id, @RequestBody Reserva reservaAtualizada) {
         Reserva reserva = reservaService.atualizarReserva(id, reservaAtualizada);
         return ResponseEntity.ok(reserva);
     }

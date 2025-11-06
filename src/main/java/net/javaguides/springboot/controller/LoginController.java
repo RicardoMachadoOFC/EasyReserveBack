@@ -41,7 +41,7 @@ public class LoginController {
     
 }
      @PutMapping("/login/{id}")
-     public ResponseEntity<String> atualizarUsuario(@PathVariable Long id, @RequestBody RegisterRequest request) {
+     public ResponseEntity<String> atualizarUsuario(@PathVariable("id") Long id, @RequestBody RegisterRequest request) {
          return usuarioService.usuarioRepository.findById(id)
              .map(usuario -> {
                  usuario.setEmail(request.getEmail());
@@ -52,5 +52,11 @@ public class LoginController {
              })
              .orElse(ResponseEntity.status(404).body("Usuário não encontrado"));
      }
+     @DeleteMapping("/login/{id}")
+     public ResponseEntity<String> deletarUsuario(@PathVariable("id") Long id) {
+         usuarioService.deletarUsuario(id);
+         return ResponseEntity.ok("usuario deletado");
+     }
+     
 
 }
