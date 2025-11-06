@@ -1,7 +1,7 @@
 package net.javaguides.springboot.controller;
 
 
-import java.awt.List;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +34,23 @@ public class LoginController {
         
     }
      @GetMapping("/login")
-     public ResponseEntity<java.util.List<Usuario>> listarUsarios(){
-    	List<Usuario> 
-    	 
+     public ResponseEntity<List<Usuario>> listarUsuarios() {
+    	    List<Usuario> usuarios = usuarioService.usuarioRepository.findAll();
+    	    return ResponseEntity.ok(usuarios);
+    
+    
+}
+     @PutMapping("/login/{id}")
+     public ResponseEntity<String> atualizarUsuario(@PathVariable Long id, @RequestBody RegisterRequest request) {
+         return usuarioService.usuarioRepository.findById(id)
+             .map(usuario -> {
+                 usuario.setEmail(request.getEmail());
+                 usuario.setSenha(request.getSenha());
+                 usuario.setRole(Role.valueOf(request.getRole().toUpperCase()));
+                 usuarioService.usuarioRepository.save(usuario);
+                 return ResponseEntity.ok("Usuário atualizado com sucesso!");
+             })
+             .orElse(ResponseEntity.status(404).body("Usuário não encontrado"));
      }
-    
-    
+
 }
