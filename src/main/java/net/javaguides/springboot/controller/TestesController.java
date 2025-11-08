@@ -9,6 +9,6 @@ public class TestesController {
 
 	@GetMapping("/")
 	public ResponseEntity<String> home() {
-		return ResponseEntity.ok("EasyReserve Backend Rodando!");
+		return ResponseEntity.ok("teste funcional");
 	}
 }
